@@ -1,0 +1,41 @@
+Mañana Viernes a las 08:00am
+
+-Cifco, 3er nivel, ala derecha,direccion de tecnologia. Con Magdalena Alfaro.
+
+
+
+PASOS:
+------ENTORNO Y PROYECTO--------------------------------------
+1-Descargar e instalar Laragon
+2-Crear proyecto Laravel (composer create-project laravel/laravel examenMinsal)
+3-Correr proyecto (php artisan serve)
+4-Conectar a la BD (archivo .env en la raiz)
+5-Crear la DB en Laragon,mysql.
+------MODELO Y MIGRACIONES------------------------------------------------
+6-Crear modelos (php artisan make:model NOMBRE -m)
+	Se crean los modelos en database/migrations.
+7-Agregar atributos al modelo
+	      $table->string('descripcion');
+            $table->double('precio',8,2);
+8-Correr migraciones (php artisan migrate)
+----------GENERADOR DE CRUDS------------------
+9-Requerir libreria (composer require ibex/crud-generator --dev)
+10-Publicar libreria (php artisan vendor:publish --tag=crud)
+11-Generar CRUD (php artisan make:crud productos) (el nombre en plural de la migracion)
+----------------RUTAS---------------------------
+12-Crear Rutas en routes/web.php
+	Importar el controlador y agregar la ruta [Route::resource('productos', ProductoController::class);]
+----------------BOOTSTRAP--------------------------
+13-Para el login importar libreria ui (composer require laravel/ui)
+14-Instalar boostrap (php artisan ui bootstrap)
+15-Crear login (php artisan ui bootstrap --auth)
+16-Ejecutar npm install && npm run dev
+
+---------RELACION DE MUCHOS A MUCHOS----------------------------
+17-Crear tabla intermedia con make:model -m
+18-Agregar relacion llave foranea a la migracion
+	      $table->foreignId('producto_id')
+                ->nullable()
+                ->constrained('productos')
+                ->cascadeOnUpdate()
+                ->nullOnDelete();
